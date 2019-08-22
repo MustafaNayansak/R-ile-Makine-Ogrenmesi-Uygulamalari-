@@ -1,12 +1,12 @@
 # PCR-Principal Component Regression
 '
-Temel bileşen analizi elimizdeki p sayıdaki bilginin yüksek kısmını, ondan daha az değişkenle açıklamak fikrine dayanır
-Büyük veri analiz süreçlerinin en zor kısmı veride çok fazla değişkenin olması anlamına geliyor.
-Veride çok fazla değişken olması multicollinearity adında bir problem ortaya çıkarıyor.
-Multicollinearity bağımsız değişkenler arasında yüksek kolerasyonlar oluşturması anlamına geliyor
+Temel bileÅŸen analizi elimizdeki p sayÄ±daki bilginin yÃ¼ksek kÄ±smÄ±nÄ±, ondan daha az deÄŸiÅŸkenle aÃ§Ä±klamak fikrine dayanÄ±r
+BÃ¼yÃ¼k veri analiz sÃ¼reÃ§lerinin en zor kÄ±smÄ± veride Ã§ok fazla deÄŸiÅŸkenin olmasÄ± anlamÄ±na geliyor.
+Veride Ã§ok fazla deÄŸiÅŸken olmasÄ± multicollinearity adÄ±nda bir problem ortaya Ã§Ä±karÄ±yor.
+Multicollinearity baÄŸÄ±msÄ±z deÄŸiÅŸkenler arasÄ±nda yÃ¼ksek kolerasyonlar oluÅŸturmasÄ± anlamÄ±na geliyor
 
-Temel bileşenler, bağımsız değişkenlere göre alt çarpanlara indirgenmiş ve birbirinden bağımsız olan değişkenlerdir
-Bu bileşenler ile kurulan regresyon modeline ise Temel Bileşen Regresyonu denir
+Temel bileÅŸenler, baÄŸÄ±msÄ±z deÄŸiÅŸkenlere gÃ¶re alt Ã§arpanlara indirgenmiÅŸ ve birbirinden baÄŸÄ±msÄ±z olan deÄŸiÅŸkenlerdir
+Bu bileÅŸenler ile kurulan regresyon modeline ise Temel BileÅŸen Regresyonu denir
 '
 library(caret)
 library(tidyverse)
@@ -49,14 +49,14 @@ pcr_fit <- pcr(Salary~.,data = training,
     scale = TRUE,
     validation = "CV")
 summary(pcr_fit)
-# Bileşenler ve bu bileşenlerin varyans açıklamaları ile ilgili bilgiler vardır
+# BileÅŸenler ve bu bileÅŸenlerin varyans aÃ§Ä±klamalarÄ± ile ilgili bilgiler vardÄ±r
 
 validationplot(pcr_fit, val.type = "MSEP")
-# Temel bileşenler için hesaplanacak olaan hata metriği
+# Temel bileÅŸenler iÃ§in hesaplanacak olaan hata metriÄŸi
 
 names(pcr_fit)
 
-# Eğitim Hatası
+# EÄŸitim HatasÄ±
 defaultSummary(data.frame(obs = training$Salary,
                           pred = as.vector(pcr_fit$fitted.values))
 )
@@ -64,19 +64,19 @@ defaultSummary(data.frame(obs = training$Salary,
 
 # Tahmin
 predict(pcr_fit,test_x)
-# Her bileşen için tahminler yapar
+# Her bileÅŸen iÃ§in tahminler yapar
 
-# 2 bileşen için
+# 2 bileÅŸen iÃ§in
 predict(pcr_fit,test_x[1:5,], ncomp = 1:2)
 
-# Test Hatası
+# Test HatasÄ±
 defaultSummary(data.frame(obs = test_y,
                           pred = as.vector(predict(pcr_fit, test_x, ncomp = 1:2)))
 )
 
 
 # Model Tuning 
-# Tune edilecek parametre bileşen sayısıdır
+# Tune edilecek parametre bileÅŸen sayÄ±sÄ±dÄ±r
 
 ctrl <- trainControl(method = "CV",
                      number = 10)
@@ -86,7 +86,7 @@ pcr_tune <- train(train_x, train_y,
                   method = "pcr",
                   trainControl = ctrl,
                   preProc = c("center", "scale"))
-# preproc veri setinde ölçeklendirme, dönüştürme işlemi yapmak için kullanılır
+# preproc veri setinde Ã¶lÃ§eklendirme, dÃ¶nÃ¼ÅŸtÃ¼rme iÅŸlemi yapmak iÃ§in kullanÄ±lÄ±r
 
 pcr_tune
 
@@ -95,7 +95,7 @@ pcr_tune <- train(train_x, train_y,
                   trainControl = ctrl,
                   tuneLength = 20,
                   preProc = c("center", "scale"))
-# tuneLength ile max 20 değişkene kadar dene
+# tuneLength ile max 20 deÄŸiÅŸkene kadar dene
 
 pcr_tune
 
