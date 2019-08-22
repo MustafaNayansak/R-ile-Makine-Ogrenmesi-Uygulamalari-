@@ -1,4 +1,4 @@
-# Kategorik Veri Analizi 
+### Kategorik Veri Analizi 
 
 setwd("C:/Users/Asus/Desktop/Sixth Episode")
 
