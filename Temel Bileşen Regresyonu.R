@@ -1,4 +1,4 @@
-## PCR-Principal Component Regression
+### PCR-Principal Component Regression
 '
 Temel bileşen analizi elimizdeki p sayıdaki bilginin yüksek kısmını, ondan daha az değişkenle açıklamak fikrine dayanır
 Büyük veri analiz süreçlerinin en zor kısmı veride çok fazla değişkenin olması anlamına geliyor.
